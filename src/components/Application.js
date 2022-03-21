@@ -17,12 +17,12 @@ const days = [
     id: 3,
     name: "Wednesday",
     spots: 0,
-  },
+  }
 ];
 
 export default function Application(props) {
   const [day, setDay] = useState('Monday');
-  
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -34,8 +34,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <DayList 
           days = {days}
-          day = {'Monday'}
-          setDay = {day => console.log(day)}
+          day = {day}
+          setDay = {setDay}
         />
         <nav className="sidebar__menu"></nav>
         <img
