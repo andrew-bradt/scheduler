@@ -6,11 +6,15 @@ import { action } from "@storybook/addon-actions";
 import "index.scss";
 
 import Button from "components/Button";
+
 import DayListItem from "components/DayListItem";
 import DayList from 'components/DayList';
+
 import InterviewerListItem from 'components/InterviewerListItem';
 import InterviewerList from 'components/InterviewerList';
+
 import Appointment from 'components/Appointment/index';
+import Header from 'components/Appointment/Header';
 
 storiesOf("Button", module)
   .addParameters({
@@ -136,5 +140,6 @@ storiesOf('Appointment', module)
     backgrounds: [{name: 'white', value: '#fff', default: true}]
   })
   .add('Appointment', () => <Appointment/>)
-  .add('Appointment With Time', () => <Appointment time = '12pm'/>)
+  .add('Appointment With Time', () => <Appointment time='12pm'/>)
+  .add('Header', () => <Header time='12pm'/>)
 ;
