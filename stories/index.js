@@ -19,6 +19,7 @@ import Empty from 'components/Appointment/Empty';
 import Show from 'components/Appointment/Show';
 import Confirm from 'components/Appointment/Confirm';
 import Status from 'components/Appointment/Status';
+import Error from 'components/Appointment/Error';
 
 storiesOf("Button", module)
   .addParameters({
@@ -150,4 +151,5 @@ storiesOf('Appointment', module)
   .add('Show', () => <Show onEdit = {action('onEdit')} onDelete = {action('onDelete')}/>)
   .add('Confirm', () => <Confirm message='Are you sure?' onCancel={action('onCancel')} onConfirm={action('onConfirm')} />)
   .add('Status', () => <Status message='Fetching Data'/>)
+  .add('Error', ()=> <Error message='😭 Something went wrong 😭' onClose={action('onClose')} />)
 ;
