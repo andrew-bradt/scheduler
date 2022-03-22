@@ -4,10 +4,14 @@ import classNames from 'classnames';
 
 export default function InterviewerListItem (props) {
   const {id, name, avatar, selected, setInterviewer} = props;
+  const interviewerListItemClass = classNames('interviewers__item', {
+    ' interviewers__item--selected': selected
+  });
   const handleClick = (id) => setInterviewer(id);
+
   return (
     <li 
-      className="interviewers__item"
+      className={interviewerListItemClass}
       key = {id}
       onClick = {() => handleClick(id)}
     >
@@ -16,7 +20,7 @@ export default function InterviewerListItem (props) {
         src={avatar}
         alt={name}
       />
-      {name}
+      {selected && name}
     </li>
   );
 }
