@@ -145,5 +145,5 @@ storiesOf('Appointment', module)
   .add('Appointment With Time', () => <Appointment time='12pm'/>)
   .add('Header', () => <Header time='12pm'/>)
   .add('Empty', () => <Empty onAdd = {action('onAdd')}/>)
-  .add('Show', () => <Show/>)
+  .add('Show', () => <Show onEdit = {action('onEdit')} onDelete = {action('onDelete')}/>)
 ;
