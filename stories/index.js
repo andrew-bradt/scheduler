@@ -155,4 +155,12 @@ storiesOf('Appointment', module)
   .add('Error', ()=> <Error message='😭 Something went wrong 😭' onClose={action('onClose')} />)
   .add('Create', ()=> <Form interviewers = {interviewers} onSave = {action('onSave')} onCancel = {action('onCancel')}/>)
   .add('Edit', ()=> <Form student='Andrew Bradt' interviewer={1} interviewers = {interviewers} onSave = {action('onSave')} onCancel = {action('onCancel')} />)
+  .add('Appointment Empty', ()=>{
+    return (
+    <>
+      <Appointment id={1} time='4pm'/>
+      <Appointment time='5pm'/>
+    </>
+    );
+  })
 ;
