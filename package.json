@@ -48,5 +48,5 @@
       "<rootDir>/.git/"
     ]
   },
-  "proxy": "https://localhost:8001"
+  "proxy": "http://localhost:8001"
 }
