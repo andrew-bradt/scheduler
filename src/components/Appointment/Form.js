@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Button from '../Button';
 import InterviewerList from 'components/InterviewerList';
 
 export default function Form (props) {
-  const {student, interviewer, interviewers, onSave, onCancel} = props;
+  const {interviewers, onSave, onCancel} = props;
+  const [student, setStudent] = useState(props.student || '');
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -15,7 +17,6 @@ export default function Form (props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-
           />
         </form>
         <InterviewerList 
