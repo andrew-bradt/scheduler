@@ -8,6 +8,10 @@ export default function Form (props) {
   const [student, setStudent] = useState(props.student || '');
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
+  const save = () => {
+    onSave(student, interviewer);
+  };
+
   const cancel = () => {
     reset();
     onCancel();
@@ -40,7 +44,7 @@ export default function Form (props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick = {cancel}>Cancel</Button>
-          <Button confirm >Save</Button>
+          <Button confirm onClick = {save}>Save</Button>
         </section>
       </section>
     </main>

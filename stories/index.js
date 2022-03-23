@@ -153,6 +153,6 @@ storiesOf('Appointment', module)
   .add('Confirm', () => <Confirm message='Are you sure?' onCancel={action('onCancel')} onConfirm={action('onConfirm')} />)
   .add('Status', () => <Status message='Fetching Data'/>)
   .add('Error', ()=> <Error message='😭 Something went wrong 😭' onClose={action('onClose')} />)
-  .add('Create', ()=> <Form interviewers = {interviewers} onSave = {action('onSave')} onCancel = {action('onCancel')} />)
+  .add('Create', ()=> <Form interviewers = {interviewers} onSave = {action('onSave')} onCancel = {action('onCancel')}/>)
   .add('Edit', ()=> <Form student='Andrew Bradt' interviewer={1} interviewers = {interviewers} onSave = {action('onSave')} onCancel = {action('onCancel')} />)
 ;
