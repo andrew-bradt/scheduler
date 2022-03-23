@@ -163,4 +163,16 @@ storiesOf('Appointment', module)
     </>
     );
   })
+  .add('Appointment Booked', ()=>{
+    return (
+      <>
+        <Appointment
+          id={1}
+          time='4pm'
+          interview={{student: 'Lydia Miller-Jones', interviewer}}
+        />
+        <Appointment time='5pm'/>
+      </>
+    );
+  })
 ;
