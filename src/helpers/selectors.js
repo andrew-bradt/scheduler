@@ -5,5 +5,8 @@ export function getAppointmentsForDay(state, day) {
 }
 
 export function getInterview(state, interview) {
-  return interview;
+  if (!interview) return null;
+  const student = interview.student;
+  const interviewer = state.interviewers[interview.interviewer];
+  return {interviewer, student};
 }
