@@ -7,7 +7,6 @@ import Empty from './Empty';
 
 export default function Appointment(props) {
   const {time, id, interview} = props;
-  console.log(interview);
   
   return (
     <article className='appointment'>
