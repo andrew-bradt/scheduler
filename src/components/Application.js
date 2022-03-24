@@ -22,7 +22,7 @@ export default function Application(props) {
     axios.get('/api/days').then(res => setDays(res.data));
   }, []);
   
-  const parsedAppointments = Object.values(dailyAppointments).map(appointment => <Appointment key={appointment.id} {...appointment}/>);
+  const parsedAppointments = dailyAppointments.map(appointment => <Appointment key={appointment.id} {...appointment}/>);
   
   return (
     <main className="layout">
