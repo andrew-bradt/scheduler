@@ -3,8 +3,12 @@ import {useState} from 'react';
 export default function useVisualMode (initial) {
   const [history, setHistory] = useState([initial]);
   
-  function transition (newMode) {
-    setHistory((prev) => [...prev, newMode]);
+  function transition (newMode, shouldReplace) {
+    const historyCopy = [...history];
+    if (shouldReplace) {
+      historyCopy.pop()
+    }
+    setHistory([...historyCopy, newMode]);
   }
 
   function back () {
