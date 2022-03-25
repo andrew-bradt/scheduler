@@ -13,11 +13,17 @@ const SHOW = 'SHOW';
 export default function Appointment(props) {
   const {time, id, interview} = props;
   const {mode, transition, back} = useVisualMode((interview) ? SHOW : EMPTY);
-  
+
   return (
     <article className='appointment'>
       <Header time = {time}/>
-      {(interview) ? <Show student = {interview.student} interviewer = {interview.interviewer}/> : <Empty/>}
+      {mode === EMPTY && <Empty /> }
+      {mode === SHOW && (
+        <Show 
+          student = {interview.student} 
+          interviewer = {interview.interviewer} 
+        />
+      )}
     </article>
   );
 }
