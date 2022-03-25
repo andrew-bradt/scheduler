@@ -1,14 +1,19 @@
 import {useState} from 'react';
 
 export default function useVisualMode (initial) {
-  const [mode, setMode] = useState(initial);
-
-  function transition (pending) {
-    setMode(pending);
+  const [history, setHistory] = useState([initial]);
+  
+  function transition (newMode) {
+    setHistory((prev) => [...prev, newMode]);
   }
 
   function back () {
+    if (history.length > 1) {
+      const historyCopy = [...history];
+      historyCopy.pop();
+      setHistory(historyCopy);
+    }
   }
 
-  return {mode, transition, back};
+  return {mode:history[history.length - 1], transition, back};
 }
