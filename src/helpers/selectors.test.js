@@ -15,7 +15,14 @@ const state = {
   ],
   appointments: {
     "1": { id: 1, time: "12pm", interview: null },
-    "2": { id: 2, time: "1pm", interview: null },
+    "2": { 
+      id: 2, 
+      time: "1pm", 
+      interview: {
+        student: 'Andrew Bradt',
+        interviewer:1
+      } 
+    },
     "3": {
       id: 3,
       time: "2pm",
@@ -81,8 +88,8 @@ test("getInterviewersForDay returns an array with a length matching the number o
 });
 
 test("getInterviewersForDay returns an array containing the correct interviewer objects", () => {
-  const [first] = getInterviewersForDay(state, "Tuesday");
-  expect(first).toEqual(state.interviewers["1"]);
+  const [interviewer] = getInterviewersForDay(state, "Tuesday");
+  expect(interviewer).toEqual(state.interviewers["2"]);
 });
 
 test("getInterviewersForDay returns an empty array when the days data is empty", () => {
@@ -111,6 +118,6 @@ test("getInterview returns an object with the interviewer data", () => {
 });
 
 test("getInterview returns null if no interview is booked", () => {
-  const result = getInterview(state, state.appointments["2"].interview);
+  const result = getInterview(state, state.appointments["4"].interview);
   expect(result).toBeNull();
 });
