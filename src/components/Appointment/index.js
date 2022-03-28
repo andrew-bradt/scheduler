@@ -57,8 +57,9 @@ export default function Appointment(props) {
       {mode === EDIT && (<Form 
         student = {interview.student} 
         interviewers = {interviewers}
-        interviewer = {interview.interviewer}
+        interviewer = {interview.interviewer.id}
         onCancel = {back}
+        onSave = {save}
         />)
       }
       {mode === CONFIRM && <Confirm message='Are you sure you would like to delete?' onConfirm = {onConfirmDelete} onCancel = {back}/>}
