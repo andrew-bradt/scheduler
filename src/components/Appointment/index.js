@@ -30,6 +30,7 @@ export default function Appointment(props) {
 
   const onCancel = () => {
     cancelInterview(id);
+    transition(EMPTY);
   };
 
   return (
