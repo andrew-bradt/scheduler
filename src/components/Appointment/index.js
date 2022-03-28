@@ -15,6 +15,7 @@ const SHOW = 'SHOW';
 const CREATE = 'CREATE';
 const SAVING = 'SAVING';
 const CONFIRM = 'CONFIRM';
+const DELETING = 'DELETING';
 
 export default function Appointment(props) {
   const {time, id, interview, interviewers, bookInterview, cancelInterview} = props;
@@ -33,7 +34,7 @@ export default function Appointment(props) {
   const onReqDelete = () => transition(CONFIRM); 
 
   const onConfirmDelete = () => {
-    transition(SAVING);
+    transition(DELETING);
     cancelInterview(id)
       .then(()=>transition(EMPTY));
   };
@@ -50,8 +51,9 @@ export default function Appointment(props) {
         />
       )}
       {mode === CREATE && <Form interviewers = {interviewers} onCancel = {back} onSave={save}/>}
-      {mode === SAVING && <Status />}
       {mode === CONFIRM && <Confirm message='Are you sure you would like to delete?' onConfirm = {onConfirmDelete} onCancel = {back}/>}
+      {mode === SAVING && <Status message='Saving' />}
+      {mode === DELETING && <Status message='Deleting' />}
     </article>
   );
 }
