@@ -15,7 +15,7 @@ const CREATE = 'CREATE';
 const SAVING = 'SAVING';
 
 export default function Appointment(props) {
-  const {time, id, interview, interviewers, bookInterview} = props;
+  const {time, id, interview, interviewers, bookInterview, cancelInterview} = props;
   const {mode, transition, back} = useVisualMode((interview) ? SHOW : EMPTY);
   
   const save = (name, interviewer) => {
@@ -28,6 +28,10 @@ export default function Appointment(props) {
       .then(()=> transition(SHOW));
   };
 
+  const onCancel = () => {
+    cancelInterview(id);
+  };
+
   return (
     <article className='appointment'>
       <Header time = {time}/>
@@ -36,6 +40,7 @@ export default function Appointment(props) {
         <Show 
           student = {interview.student} 
           interviewer = {interview.interviewer} 
+          onDelete = {onCancel}
         />
       )}
       {mode === CREATE && <Form interviewers = {interviewers} onCancel = {back} onSave={save}/>}

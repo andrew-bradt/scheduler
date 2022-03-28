@@ -31,6 +31,10 @@ export default function Application(props) {
       .then(()=>setState({...state, appointments}));
   };
 
+  const cancelInterview = (id) => {
+    console.log(id);
+  };
+
   useEffect(()=>{
     Promise.all([
       axios.get('/api/days'),
@@ -59,6 +63,7 @@ export default function Application(props) {
         interview = {interview}
         interviewers = {interviewers}
         bookInterview = {bookInterview}
+        cancelInterview = {cancelInterview}
       />
     );
   });
@@ -85,9 +90,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {
-          parsedAppointments
-        }
+        {parsedAppointments}
         <Appointment key='last' time='5pm'/>
       </section>
     </main>
