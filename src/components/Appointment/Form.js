@@ -11,7 +11,13 @@ export default function Form (props) {
 
   const save = () => validate(() => onSave(student, interviewer));
 
-  const validate = (callback) => (student === '') ? setError('Student name cannot be blank') : callback();
+  const validate = (callback) => {
+    if (student === '') {
+      return setError('Student name cannot be blank');
+    }
+    setError('');
+    callback();
+  };
 
   const cancel = () => {
     reset();
