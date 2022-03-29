@@ -40,10 +40,12 @@ export default function Appointment(props) {
   const onReqDelete = () => transition(CONFIRM); 
 
   const onConfirmDelete = () => {
-    transition(DELETING);
+    transition(DELETING, true);
     cancelInterview(id)
       .then(()=>transition(EMPTY))
-      .catch(()=>transition(ERROR_DELETE, true));
+      .catch(()=>{
+        transition(ERROR_DELETE, true);
+      });
   };
 
   return (
@@ -68,10 +70,10 @@ export default function Appointment(props) {
         />)
       }
       {mode === CONFIRM && <Confirm message='Are you sure you would like to delete?' onConfirm = {onConfirmDelete} onCancel = {back}/>}
-      {mode === SAVING && <Status message='Saving' />}
+      {mode === SAVING && <Status message='Saving'/>}
       {mode === DELETING && <Status message='Deleting' />}
       {mode === ERROR_SAVE && <Error message='Error Saving' onClose = {back}/>}
-      {mode === ERROR_DELETE && <Error message='Error Deleting'/>}
+      {mode === ERROR_DELETE && <Error message='Error Deleting' onClose = {back}/>}
     </article>
   );
 }
