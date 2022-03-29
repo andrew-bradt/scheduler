@@ -15,19 +15,9 @@
 // }
 
 export function getInterviewersForDay(state, day) {
-  const dayState = state.days.find(appointment => appointment.name === day);
-  const appointments = dayState && dayState.appointments
-    .map(id => state.appointments[id])
-    .filter(({interview}) => !(!interview));
-
-  const daysInterviewers = {};
-
-  Array.isArray(appointments) && appointments.forEach(apt => {
-    const {interviewer} = apt.interview;
-    daysInterviewers[interviewer] = state.interviewers[interviewer];
-  });
-
-  return Object.values(daysInterviewers) || [];
+  const dayState = state.days.find(matchingDay => matchingDay.name === day);
+  const interviewers = dayState && dayState.interviewers.map(id => state.interviewers[id]);
+  return interviewers || [];
 }
 
 export function getAppointmentsForDay(state, day) {
