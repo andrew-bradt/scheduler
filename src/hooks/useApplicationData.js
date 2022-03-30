@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { getAppointmentsForDay } from 'helpers/selectors';
 
 export default function useApplicationData () {
   const [state, setState] = useState({
