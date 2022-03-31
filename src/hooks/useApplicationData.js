@@ -6,7 +6,21 @@ const SET_DAY = 'SET_DAY';
 const SET_INTERVIEW = 'SET_INTERVIEW';
 
 const reducer = (state, action) => {
-  
+  const actions = {
+    SET_APPOINTMENT_DATA() {
+      console.log(SET_APPOINTMENT_DATA);
+    },
+    SET_DAY() {
+      console.log(SET_DAY);
+    },
+    SET_INTERVIEW() {
+      console.log(SET_INTERVIEW);
+    },
+    default() {
+      throw new Error(`Non-existant action type: ${action.type}`);
+    }
+  };
+  return (actions[action.type] || actions.default)();
 };
 
 export default function useApplicationData () {
