@@ -42,14 +42,13 @@ const updateSpots = (state, appointments) => {
 };
 
 export default function useApplicationData () {
-  const initialState = {
+
+  const [state, dispatch] = useReducer(reducer, {
     day: 'Monday',
     days: [],
     appointments: {},
     interviewers: {}
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
+  });
 
   useEffect(()=>{
     Promise.all([
@@ -70,16 +69,22 @@ export default function useApplicationData () {
   
   const setDay = (day) => dispatch({type: SET_DAY, day});
 
-  const bookInterview = (id, interview) => {
+  const prepareStateAfterInterviewChange = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
-      interview: {...interview}
+      interview
     };
 
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
+
+    return {appointment, appointments};
+  };
+
+  const bookInterview = (id, interview) => {
+    const {appointment, appointments} = prepareStateAfterInterviewChange(id, interview);
     
     return axios.put(`/api/appointments/${id}`, appointment)
       .then(()=> dispatch({
@@ -89,16 +94,10 @@ export default function useApplicationData () {
       }));
   };
 
+  
   const cancelInterview = (id) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null
-    };
+    const {appointment, appointments} = prepareStateAfterInterviewChange(id, null);
 
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
     return axios.delete(`/api/appointments/${id}`)
       .then(()=> dispatch({
         type: SET_INTERVIEW,
