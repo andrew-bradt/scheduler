@@ -8,13 +8,18 @@ const SET_INTERVIEW = 'SET_INTERVIEW';
 const reducer = (state, action) => {
   const actions = {
     SET_APPOINTMENT_DATA() {
-      console.log(SET_APPOINTMENT_DATA);
+      return {
+        ...state, 
+        days: action.days, 
+        appointments: action.appointments, 
+        interviewers: action.interviewers 
+      };
     },
     SET_DAY() {
-      console.log(SET_DAY);
+      return {...state, day:action.day};
     },
     SET_INTERVIEW() {
-      console.log(SET_INTERVIEW);
+      return {...state, appointments: action.appointments, days: action.days};
     },
     default() {
       throw new Error(`Non-existant action type: ${action.type}`);
@@ -42,16 +47,24 @@ export default function useApplicationData () {
     ])
     .then(all => {
       const [days, appointments, interviewers] = all;
-      setState(prev => ({
-        ...prev, 
-        days: days.data, 
+      // setState(prev => ({
+      //   ...prev, 
+      //   days: days.data, 
+      //   appointments: appointments.data,
+      //   interviewers: interviewers.data
+      // }));
+      dispatch({
+        type: SET_APPOINTMENT_DATA,
+        days: days.data,
         appointments: appointments.data,
         interviewers: interviewers.data
-      }));
+      });
     })
   }, []);
   
-  const setDay = (day) => setState((prev) => ({...prev , day}));
+  // const setDay = (day) => setState((prev) => ({...prev , day}));
+  const setDay = (day) => dispatch({type: SET_DAY, day});
+
 
   const updateSpots = (state, appointments) => {
     const stateForDay = state.days.find(day => day.name === state.day); 
@@ -78,8 +91,13 @@ export default function useApplicationData () {
     };
     
     return axios.put(`/api/appointments/${id}`, appointment)
-      .then(()=>setState({
-        ...state, 
+      // .then(()=>setState({
+      //   ...state, 
+      //   appointments,
+      //   days: updateSpots(state, appointments)
+      // }));
+      .then(()=> dispatch({
+        type: SET_INTERVIEW,
         appointments,
         days: updateSpots(state, appointments)
       }));
@@ -96,10 +114,15 @@ export default function useApplicationData () {
       [id]: appointment
     };
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => setState({
-        ...state, 
-        appointments, 
-        days: updateSpots(state, appointments) 
+      // .then(() => setState({
+      //   ...state, 
+      //   appointments, 
+      //   days: updateSpots(state, appointments) 
+      // }));
+      .then(()=> dispatch({
+        type: SET_INTERVIEW,
+        appointments,
+        days: updateSpots(state, appointments)
       }));
   };
 
