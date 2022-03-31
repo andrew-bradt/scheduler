@@ -67,9 +67,7 @@ export default function useApplicationData () {
     })
   }, []);
   
-  const setDay = (day) => dispatch({type: SET_DAY, day});
-
-  const prepareStateAfterInterviewChange = (id, interview) => {
+  const _stateAfterModifyingInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview
@@ -83,8 +81,10 @@ export default function useApplicationData () {
     return {appointment, appointments};
   };
 
+  const setDay = (day) => dispatch({type: SET_DAY, day});
+
   const bookInterview = (id, interview) => {
-    const {appointment, appointments} = prepareStateAfterInterviewChange(id, interview);
+    const {appointment, appointments} = _stateAfterModifyingInterview(id, interview);
     
     return axios.put(`/api/appointments/${id}`, appointment)
       .then(()=> dispatch({
@@ -93,10 +93,9 @@ export default function useApplicationData () {
         days: updateSpots(state, appointments)
       }));
   };
-
   
   const cancelInterview = (id) => {
-    const {appointment, appointments} = prepareStateAfterInterviewChange(id, null);
+    const {appointments} = _stateAfterModifyingInterview(id, null);
 
     return axios.delete(`/api/appointments/${id}`)
       .then(()=> dispatch({
