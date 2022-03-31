@@ -1,13 +1,24 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useReducer} from 'react';
 import axios from 'axios';
 
+const SET_APPOINTMENT_DATA = 'SET_APPOINTMENT_DATA';
+const SET_DAY = 'SET_DAY';
+const SET_INTERVIEW = 'SET_INTERVIEW';
+
+const reducer = (state, action) => {
+  
+};
+
 export default function useApplicationData () {
-  const [state, setState] = useState({
+  const initialState = {
     day: 'Monday',
     days: [],
     appointments: {},
     interviewers: {}
-  });
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // const [state, setState] = useState(initialState);
 
   useEffect(()=>{
     Promise.all([
