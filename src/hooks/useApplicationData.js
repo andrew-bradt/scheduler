@@ -19,7 +19,8 @@ const reducer = (state, action) => {
       return {...state, day:action.day};
     },
     SET_INTERVIEW() {
-      return {...state, appointments: action.appointments, days: action.days};
+      const days = updateSpots(state, action.appointments);
+      return {...state, appointments: action.appointments, days};
     },
     default() {
       throw new Error(`Non-existant action type: ${action.type}`);
@@ -42,7 +43,6 @@ const updateSpots = (state, appointments) => {
 };
 
 export default function useApplicationData () {
-
   const [state, dispatch] = useReducer(reducer, {
     day: 'Monday',
     days: [],
@@ -90,7 +90,6 @@ export default function useApplicationData () {
       .then(()=> dispatch({
         type: SET_INTERVIEW,
         appointments,
-        days: updateSpots(state, appointments)
       }));
   };
   
@@ -100,8 +99,7 @@ export default function useApplicationData () {
     return axios.delete(`/api/appointments/${id}`)
       .then(()=> dispatch({
         type: SET_INTERVIEW,
-        appointments,
-        days: updateSpots(state, appointments)
+        appointments
       }));
   };
 
